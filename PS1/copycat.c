@@ -10,11 +10,14 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <string.h>
 
 int processFiles(int iFD, int oFD, int bufferSize)
 {
+	int bytesRead = 0, bytesWrite = 0, bytesMissed = 0;
 	char *buffer = malloc (bufferSize);
-	int bytesRead = 0, bytesWrite = 0;
+	
+	// Check to ensure success with allocating memory
 	if (buffer == NULL)
 	{
 		fprintf(stderr, "Cannot allocate buffer with size: %d\n", bufferSize);
@@ -25,14 +28,15 @@ int processFiles(int iFD, int oFD, int bufferSize)
 	while ((bytesRead = read(iFD, buffer, bufferSize)) > 0)
 	{
 		bytesWrite = write(oFD, buffer, bytesRead);
-		printf("%d\n", bytesRead);
-		if (bytesWrite != bytesRead)
+		while (bytesWrite != bytesRead) //Partial write
 		{
-			fprintf(stderr, "Cannot write to file: %s\n", strerror(errno));
-			return -1;
+			bytesMissed = bytesRead - bytesWrite;
+			// write remaining bytes
+			bytesWrite += write(oFD, buffer+bytesWrite, bytesMissed);
 		}
 	}
 
+	// Error when trying to read the input file
 	if (bytesRead < 0)
 	{
 		fprintf(stderr, "Cannot read file: %s\n", strerror(errno));
@@ -48,6 +52,8 @@ int main (int argc, char *argv[])
 	int bufferSize = 4096;
 	char* outfile = NULL;
 	int numFiles = 0;
+	// Default input file descriptor is stdin
+	// Default output file descriptor is stdout
 	int iFD = 0, oFD = 1;
 	int ii;
 
@@ -56,9 +62,11 @@ int main (int argc, char *argv[])
 	{
 		switch (opt)
 		{
+			// Manually assign buffer size
 			case 'b':
 				bufferSize = atoi(optarg);
 				break;
+			// Initialize output filename
 			case 'o':
 				outfile = optarg;
 				break;
@@ -70,13 +78,14 @@ int main (int argc, char *argv[])
 					fprintf(stderr, "Usage: %s [-b ###] [-o outfile] infile1 [...infile2....]\n", argv[0]);
 				return -1;
 				break;
+			// Just in case
 			default:
 				fprintf(stderr, "Usage: %s [-b ###] [-o outfile] infile1 [...infile2....]\n", argv[0]);
 				return-1;
 		}
 	}
 
-	// Initialize array of infiles
+	// Initialize array of input files
 	char *infile[argc-optind];
 	while(optind < argc)
 	{
@@ -94,6 +103,8 @@ int main (int argc, char *argv[])
 			return -1;
 		}
 	}
+	else
+		oFD = 1;
 
 	if (numFiles > 0)
 	{
@@ -101,7 +112,6 @@ int main (int argc, char *argv[])
 		{
 			if(*infile[ii] != '-')
 			{
-				printf("Opening %s\n", infile[ii]);
 				iFD = open(infile[ii], O_RDONLY);
 				if (iFD == -1)
 				{
@@ -117,11 +127,12 @@ int main (int argc, char *argv[])
 
 			if (processFiles(iFD, oFD, bufferSize) < 0)
 			{
-				printf("SIIII\n");
+				// Error was already reported. Terminate the program.
 				return -1;
 			}
 
-			if(*infile[ii] != '-')
+			// close input file descriptor unless it is stdin
+			if(iFD != 0)
 			{
 				if (close(iFD) == -1)
 				{
@@ -133,12 +144,15 @@ int main (int argc, char *argv[])
 	}
 	else
 	{
-		if (processFiles(iFD, oFD, bufferSize) < -1){
+		if (processFiles(iFD, oFD, bufferSize) < -1)
+		{
+			// Error was already reported. Terminate the program.
 			return -1;
 		}
 	}
 
-	if (oFD != 2 && close(oFD) == -1)
+	// Close the output file and end the program
+	if (close(oFD) == -1)
 	{
 		fprintf(stderr, "Cannot close output file: %s\n", strerror(errno));
 		return -1;
