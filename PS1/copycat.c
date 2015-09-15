@@ -5,7 +5,7 @@
 
 #include <fcntl.h>
 #include <errno.h>
-#include <fctnl.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 				break;
 			// if getopt() does not recognize an option character
 			case '?':
-				if (optopt == 'b' || optopt == 'c')
+				if (optopt == 'b' || optopt == 'o')
 					fprintf(stderr, "Usage: -%c incorrect/missing argument.\n", optopt);
 				else
 					fprintf(stderr, "Usage: %s [-b ###] [-o outfile] infile1 [...infile2....]\n", argv[0]);
