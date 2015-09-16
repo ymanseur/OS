@@ -2,6 +2,7 @@
 // Cooper Union Fall 2015
 // ECE 357: Operating Systems
 // Problem Set 1
+// copycat.c
 
 #include <fcntl.h>
 #include <errno.h>
@@ -64,7 +65,13 @@ int main (int argc, char *argv[])
 		{
 			// Manually assign buffer size
 			case 'b':
-				bufferSize = atoi(optarg);
+				if(atoi(optarg) == 0)
+				{
+					fprintf(stderr, "Usage: incorrect argument. Must be an integer greater than 0.\n");
+					return -1;
+				}
+				else
+					bufferSize = atoi(optarg);
 				break;
 			// Initialize output filename
 			case 'o':
@@ -73,7 +80,7 @@ int main (int argc, char *argv[])
 			// if getopt() does not recognize an option character
 			case '?':
 				if (optopt == 'b' || optopt == 'o')
-					fprintf(stderr, "Usage: -%c incorrect/missing argument.\n", optopt);
+					fprintf(stderr, "Usage: -%c missing argument.\n", optopt);
 				else
 					fprintf(stderr, "Usage: %s [-b ###] [-o outfile] infile1 [...infile2....]\n", argv[0]);
 				return -1;
