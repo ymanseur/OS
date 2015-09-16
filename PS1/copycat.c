@@ -43,7 +43,7 @@ int processFiles(int iFD, int oFD, int bufferSize)
 		return -1;
 	}
 
-	return bytesRead;
+	return 0;
 }
 
 int main (int argc, char *argv[])
@@ -96,7 +96,7 @@ int main (int argc, char *argv[])
 
 	if (outfile != NULL)
 	{
-		oFD = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+		oFD = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (oFD == -1)
 		{
 			fprintf(stderr, "Cannot open output file: %s\n", strerror(errno));
@@ -125,7 +125,7 @@ int main (int argc, char *argv[])
 				iFD = 0;
 			}
 
-			if (processFiles(iFD, oFD, bufferSize) < 0)
+			if (processFiles(iFD, oFD, bufferSize) == -1)
 			{
 				// Error was already reported. Terminate the program.
 				return -1;
@@ -144,7 +144,7 @@ int main (int argc, char *argv[])
 	}
 	else
 	{
-		if (processFiles(iFD, oFD, bufferSize) < -1)
+		if (processFiles(iFD, oFD, bufferSize) == -1)
 		{
 			// Error was already reported. Terminate the program.
 			return -1;
