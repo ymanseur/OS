@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int processFiles(int iFD, int oFD, int bufferSize)
+int processFile(int iFD, int oFD, int bufferSize)
 {
 	int bytesRead = 0, bytesWrite = 0, bytesMissed = 0;
 	char *buffer = malloc (bufferSize);
@@ -29,6 +29,12 @@ int processFiles(int iFD, int oFD, int bufferSize)
 	while ((bytesRead = read(iFD, buffer, bufferSize)) > 0)
 	{
 		bytesWrite = write(oFD, buffer, bytesRead);
+
+		if(bytesWrite < 0)
+		{
+			fprintf(stderr, "Write failed: %s\n", strerror(errno));
+			return -1;
+		}
 		while (bytesWrite != bytesRead) //Partial write
 		{
 			bytesMissed = bytesRead - bytesWrite;
@@ -106,7 +112,7 @@ int main (int argc, char *argv[])
 		oFD = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (oFD == -1)
 		{
-			fprintf(stderr, "Cannot open output file: %s\n", strerror(errno));
+			fprintf(stderr, "Cannot open output file: %s\n", outfile);
 			return -1;
 		}
 	}
@@ -117,12 +123,13 @@ int main (int argc, char *argv[])
 	{
 		for (ii = 0; ii < numFiles; ii++)
 		{
-			if(*infile[ii] != '-')
+			if(strcmp(infile[ii], "-") != 0)
+			//if(*infile[ii] != '-')
 			{
 				iFD = open(infile[ii], O_RDONLY);
 				if (iFD == -1)
 				{
-					fprintf(stderr, "Cannot open input file: %s\n", strerror(errno));
+					fprintf(stderr, "Cannot open input file: %s\n", infile[ii]);
 					return -1;
 				}
 			}
@@ -132,7 +139,7 @@ int main (int argc, char *argv[])
 				iFD = 0;
 			}
 
-			if (processFiles(iFD, oFD, bufferSize) == -1)
+			if (processFile(iFD, oFD, bufferSize) == -1)
 			{
 				// Error was already reported. Terminate the program.
 				return -1;
@@ -151,7 +158,7 @@ int main (int argc, char *argv[])
 	}
 	else
 	{
-		if (processFiles(iFD, oFD, bufferSize) == -1)
+		if (processFile(iFD, oFD, bufferSize) == -1)
 		{
 			// Error was already reported. Terminate the program.
 			return -1;
