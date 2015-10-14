@@ -1,7 +1,7 @@
 // Yacine Manseur
 // Cooper Union Fall 2015
 // ECE 357: Operating Systems
-// Problem Set 2
+// Problem Set 3
 // shell.c
 
 #include <unistd.h>
