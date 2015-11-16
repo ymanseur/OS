@@ -21,7 +21,7 @@ int sem_try(struct sem *s)
 
 	if (s->semval > 0)
 	{
-		(s->semval)--;
+		s->semval--;
 		s->lock = 0;
 		return 1;
 	}
@@ -40,8 +40,8 @@ void sem_wait(struct sem *s)
 
 		if(s->semval > 0)
 		{
-			(s->semval)--;
-			s->semwait[my_procnum] = 0;
+			s->semval--;
+			//s->semwait[my_procnum] = 0;
 			s->lock = 0;
 			return;
 		}
@@ -50,15 +50,14 @@ void sem_wait(struct sem *s)
 			sigset_t mask;
 			s->semwait[my_procnum] = 1;
 			s->sempid[my_procnum] = getpid();
-			sigfillset(&mask);
+			sigfillset(&mask); /* Intialize the mask to include all signals */
 			sigdelset(&mask, SIGUSR1);
-			sigdelset(&mask, SIGINT);
-			sigprocmask(SIG_BLOCK, &mask, NULL);
+			sigdelset(&mask, SIGINT); /* So that the program can be aborted manually */
+			sigprocmask(SIG_BLOCK, &mask, NULL); /* Block */
 			signal(SIGUSR1, sig_handler);
 			s->lock = 0;
-			s->semwait[my_procnum] = 1;
-			sigsuspend(&mask);
-			sigprocmask(SIG_UNBLOCK, &mask, NULL);
+			sigsuspend(&mask); /* Wait for either SIGUSR1 or SIGINT */
+			sigprocmask(SIG_UNBLOCK, &mask, NULL); /* Unblock */
 		}
 	}
 }
@@ -74,7 +73,7 @@ void sem_inc(struct sem *s)
 		{
 			s->semwait[id] = 0;
 			kill(s->sempid[id],SIGUSR1);
-			break;
+			//break;
 		}
 	}
 	s->lock = 0;

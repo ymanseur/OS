@@ -12,13 +12,13 @@
 #include <sys/types.h>
 #define N_PROC 64 /* Maximum number of virtual processors required to accept */
 
-int my_procnum; /* small integer identifier */
+int my_procnum; /* Small integer identifier */
 
 struct sem
 {
-	volatile char lock;	  /* lock */
-	int semval;			  /* semaphore value */
-	int semwait[N_PROC];  /* waiting */
+	volatile char lock;	  /* Lock */
+	int semval;			  /* Number of Resources */
+	int semwait[N_PROC];  /* Waiting */
 	pid_t sempid[N_PROC]; /* ID of process that did last op */
 };
 

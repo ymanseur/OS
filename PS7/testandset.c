@@ -18,6 +18,12 @@
 
 int tas(volatile char *lock);
 
+void reportError(char *e)
+{
+	perror(e);
+	exit(-1);
+}
+
 main(int argc, char *argv[])
 {
 	int fd;
@@ -31,25 +37,17 @@ main(int argc, char *argv[])
 
 	fd = shm_open("/myregion", O_RDWR | O_CREAT | O_TRUNC, 0766);
 	if (fd < 0)
-	{
-		perror("Error creating shared memory object");
-		exit(-1);
-	}
+		reportError("Error creating shared memory object");
 
 	// Used to avoid bus error
 	if(ftruncate(fd,size) < 0)
-	{
-		perror("Error truncating shared memory object");
-		exit(-1);
-	}
+		reportError("Error truncating shared memory object");
 
 	sharedInt = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	if (sharedInt == MAP_FAILED)
-	{
-		perror("Error creating mmap");
-		exit(-1);
-	}
-	*sharedInt = 0L;
+		reportError("Error creating mmap");
+
+	*sharedInt = 0L; /* Initialize the number */
 
 	for(procNum = 0; procNum < numCores; procNum++)
 	{
