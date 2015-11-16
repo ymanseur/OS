@@ -44,16 +44,95 @@ void reportError(char *e)
 	exit(-1);
 }
 
+void createMultipleWriters(int numProc, int numWords)
+{
+	FILE *written;
+	written = fopen("written.txt", "a");
+	if(written==NULL)
+		reportError("Error opening temp file");
+	int ii, jj;
+	pid_t pid;
+	for(ii = 0; ii < numProc; ii++)
+	{
+		switch(pid=fork())
+		{
+			case -1: 
+				reportError("Error creating fork");
+			case 0:
+				my_procnum = ii+1;
+				for(jj = ii*numWords; jj < (ii+1)*numWords; jj++)
+				{
+					fifo_wr(f,jj);
+					printf("Process %d wrote %d\n", my_procnum, jj);
+					fprintf(written, "%d\n", jj);
+				}
+				exit(0);
+		}
+	}
+	while(wait(NULL) != -1);
+	fclose(written);
+}
+
+void createSingleReader(int numProc, int numWords)
+{
+	FILE *read;
+	read = fopen("read.txt", "a");
+	int jj, total = 0;
+	pid_t pid;
+	unsigned long value;
+
+	switch(pid=fork())
+	{
+		case -1:
+			reportError("Error creating fork");
+		case 0:
+			for(jj = 0; jj < numProc*numWords; jj++)
+			{
+				value = fifo_rd(f);
+				total++;
+				printf("Value #%d read: %lu\n", total, value);
+				fprintf(read, "%lu\n", value);
+			}
+			printf("Total words received: %d\n", total);
+			exit(0);
+	}
+	while(wait(NULL) != -1);
+	fclose(read);
+}
+
+void compareResults()
+{
+	FILE *f1, *f2;
+	int c1, c2;
+	int totalErrors=0;
+	f1 = fopen("written.txt", "r");
+	f2 = fopen("read.txt", "r");
+	c1 = fgetc(f1);
+	c2 = fgetc(f2);
+	while(c1!=EOF || c2 != EOF)
+	{
+		if(c1 != '\n' && c2 != '\n'){
+			if(abs(c1-c2) > 0)
+				totalErrors ++;
+			printf("%d\n", abs(c1-c2));
+			//printf("%c, %c\n", c1, c1);
+		}
+			
+		c1 = fgetc(f1);
+		c2 = fgetc(f2);
+	}
+	printf("Total Errors found: %d\n", totalErrors);
+	fclose(f1);
+	fclose(f2);
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc != 3)
 		reportError("Please enter only two arguments");
 
-	int numProc, numWords, ii, jj, total;
-	unsigned long value;
-	pid_t pid;
-	numProc = atoi(argv[1]);
-	numWords = atoi(argv[2]);
+	int numProc = atoi(argv[1]);
+	int numWords = atoi(argv[2]);
 
 	if(numProc > 64)
 		reportError("Error: Maximum number of virtual processors exceeded");
@@ -65,32 +144,12 @@ int main(int argc, char *argv[])
 	fifo_init(f);
 	my_procnum = 0;
 
-	for(ii = 1; ii <= numProc; ii++)
-	{
-		switch(pid=fork())
-		{
-			case -1: 
-				reportError("Error creating fork");
-			case 0:
-				my_procnum = ii;
-				for(jj = ii*numWords; jj < (ii+1)*numWords; jj++)
-				{
-					fifo_wr(f,jj);
-					printf("Process %d wrote %d\n", my_procnum, jj);
-				}
-				exit(0);
-		}
-	}
-	while(wait(NULL) != -1);
+	createMultipleWriters(numProc, numWords);
+	createSingleReader(numProc, numWords);
+	compareResults();
 
-	total = 0;
-	for(jj = 0; jj < numProc*numWords; jj++)
-	{
-		value = fifo_rd(f);
-		printf("Value read: %lu\n", value);
-		total++;
-	}
-
-	printf("Total words received: %d\n", total);
-	return 0;
+	remove("written.txt");
+	remove("read.txt");
+	
+	return 0;	
 }

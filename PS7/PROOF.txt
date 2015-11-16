@@ -1,0 +1,253 @@
+yacine@yacine-N53SV ~/Documents/OS/OS/PS7 $ make
+gcc -c fifotest.c
+gcc -o fifotest.exe fifotest.o fifo.o sem.o myQueue.o tas64.s
+yacine@yacine-N53SV ~/Documents/OS/OS/PS7 $ ./fifotest.exe 64 1
+Process 1 wrote 0
+Process 2 wrote 1
+Process 3 wrote 2
+Process 4 wrote 3
+Process 6 wrote 5
+Process 5 wrote 4
+Process 7 wrote 6
+Process 8 wrote 7
+Process 9 wrote 8
+Process 10 wrote 9
+Process 11 wrote 10
+Process 12 wrote 11
+Process 13 wrote 12
+Process 14 wrote 13
+Process 15 wrote 14
+Process 16 wrote 15
+Process 17 wrote 16
+Process 18 wrote 17
+Process 19 wrote 18
+Process 20 wrote 19
+Process 22 wrote 21
+Process 24 wrote 23
+Process 25 wrote 24
+Process 21 wrote 20
+Process 26 wrote 25
+Process 27 wrote 26
+Process 23 wrote 22
+Process 28 wrote 27
+Process 29 wrote 28
+Process 30 wrote 29
+Process 31 wrote 30
+Process 32 wrote 31
+Process 33 wrote 32
+Process 34 wrote 33
+Process 35 wrote 34
+Process 36 wrote 35
+Process 37 wrote 36
+Process 38 wrote 37
+Process 39 wrote 38
+Process 40 wrote 39
+Process 41 wrote 40
+Process 42 wrote 41
+Process 43 wrote 42
+Process 44 wrote 43
+Process 45 wrote 44
+Process 46 wrote 45
+Process 47 wrote 46
+Process 48 wrote 47
+Process 49 wrote 48
+Process 50 wrote 49
+Process 51 wrote 50
+Process 52 wrote 51
+Process 53 wrote 52
+Process 54 wrote 53
+Process 55 wrote 54
+Process 56 wrote 55
+Process 57 wrote 56
+Process 58 wrote 57
+Process 59 wrote 58
+Process 60 wrote 59
+Process 61 wrote 60
+Process 62 wrote 61
+Process 63 wrote 62
+Process 64 wrote 63
+Value #1 read: 0
+Value #2 read: 1
+Value #3 read: 2
+Value #4 read: 3
+Value #5 read: 4
+Value #6 read: 5
+Value #7 read: 6
+Value #8 read: 7
+Value #9 read: 8
+Value #10 read: 9
+Value #11 read: 10
+Value #12 read: 11
+Value #13 read: 12
+Value #14 read: 13
+Value #15 read: 14
+Value #16 read: 15
+Value #17 read: 16
+Value #18 read: 17
+Value #19 read: 18
+Value #20 read: 19
+Value #21 read: 21
+Value #22 read: 23
+Value #23 read: 24
+Value #24 read: 20
+Value #25 read: 25
+Value #26 read: 26
+Value #27 read: 22
+Value #28 read: 27
+Value #29 read: 28
+Value #30 read: 29
+Value #31 read: 30
+Value #32 read: 31
+Value #33 read: 32
+Value #34 read: 33
+Value #35 read: 34
+Value #36 read: 35
+Value #37 read: 36
+Value #38 read: 37
+Value #39 read: 38
+Value #40 read: 39
+Value #41 read: 40
+Value #42 read: 41
+Value #43 read: 42
+Value #44 read: 43
+Value #45 read: 44
+Value #46 read: 45
+Value #47 read: 46
+Value #48 read: 47
+Value #49 read: 48
+Value #50 read: 49
+Value #51 read: 50
+Value #52 read: 51
+Value #53 read: 52
+Value #54 read: 53
+Value #55 read: 54
+Value #56 read: 55
+Value #57 read: 56
+Value #58 read: 57
+Value #59 read: 58
+Value #60 read: 59
+Value #61 read: 60
+Value #62 read: 61
+Value #63 read: 62
+Value #64 read: 63
+Total words received: 64
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+Total Errors found: 2
+

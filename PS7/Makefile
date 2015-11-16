@@ -1,5 +1,5 @@
-fifotest.exe: fifotest.o fifo.o sem.o tas64.s 
-	gcc -o fifotest.exe fifotest.o fifo.o sem.o tas64.s
+fifotest.exe: fifotest.o fifo.o sem.o myQueue.o tas64.s 
+	gcc -o fifotest.exe fifotest.o fifo.o sem.o myQueue.o tas64.s
 
 testandset.o: testandset.c
 	gcc -c testandset.c
@@ -12,6 +12,9 @@ fifo.o: fifo.c fifo.h
 
 sem.o: sem.c sem.h
 	gcc -c sem.c
+
+myQueue.o: myQueue.c myQueue.h
+	gcc -c myQueue.c
 
 clean:
 	rm -f *.exe *.o *.stackdump *~
