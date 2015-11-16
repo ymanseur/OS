@@ -1,0 +1,10 @@
+yacine@yacine-N53SV ~/Documents/OS/OS/PS7 $ gcc tas64.s testandset.c -o P1 -lrt
+yacine@yacine-N53SV ~/Documents/OS/OS/PS7 $ ./P1
+First test complete.
+The value in memory should be 40000000.
+The value we have is: 12025555
+
+Second test complete.
+The value in memory should be 40000000.
+The value we have is: 40000000
+
