@@ -1,0 +1,13 @@
+yacine@yacine-N53SV ~/Documents/OS/OS/PS8 $ as --64 -o a.o problem3.S 
+yacine@yacine-N53SV ~/Documents/OS/OS/PS8 $ ld -m elf_x86_64 a.o
+yacine@yacine-N53SV ~/Documents/OS/OS/PS8 $ ./a.out 
+Hello World.
+yacine@yacine-N53SV ~/Documents/OS/OS/PS8 $ strace ./a.out
+execve("./a.out", ["./a.out"], [/* 52 vars */]) = 0
+write(1, "Hello World.\n", 13Hello World.
+)          = 13
+_exit(1)                                = ?
++++ exited with 1 +++
+yacine@yacine-N53SV ~/Documents/OS/OS/PS8 $ echo $?
+1
+
