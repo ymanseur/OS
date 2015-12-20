@@ -1,0 +1,192 @@
+yacine@yacine-N53SV ~/Documents/OS/OS/PS9 $ ./test.exe 
+Hooray made it to init_fn, stkaddr 0x7fe2fdd75ff4
+Asked to adjust child stack by 0XFFFFFFFFFFFDF000 bytes bet 0x7fe2fdd45000 and 0x7fe2fdd55000
+Adjusted saved bp @0x7fe2fdd54fd8 to 0x7fe2fdd54ff8
+Adjusted saved bp @0x7fe2fdd54ff8 to 0x7fe2fdd55000
+Enough already, saved BP @0x7fe2fdd55000 is (nil)
+<<in parent addr 0x7fe2fdd75ff4>>
+Wow, made it to parent, stkaddr=0x7fe2fdd75fd4
+Asked to adjust child stack by 0XFFFFFFFFFFFCF000 bytes bet 0x7fe2fdd35000 and 0x7fe2fdd45000
+Adjusted saved bp @0x7fe2fdd44fb8 to 0x7fe2fdd44fd8
+Adjusted saved bp @0x7fe2fdd44fd8 to 0x7fe2fdd44ff8
+Adjusted saved bp @0x7fe2fdd44ff8 to 0x7fe2fdd45000
+Enough already, saved BP @0x7fe2fdd45000 is (nil)
+<<in child addr 0x7fe2fdd54ff4>>
+CHILD 1: START &y=0x7fe2fdd54fd4
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	20	1
+3	1	READY   	0x7fe2fdd35000	0	20	0
+CHILD 2: START &y=0x7fe2fdd44fb4
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	21	2
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	21	3
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	22	4
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	22	5
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	23	6
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	23	7
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	24	8
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	24	9
+3	1	READY   	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	25	10
+3	1	RUNNING 	0x7fe2fdd35000	4	24	1
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	25	10
+3	1	READY   	0x7fe2fdd35000	4	25	2
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	25	11
+3	1	READY   	0x7fe2fdd35000	4	25	2
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	26	12
+3	1	RUNNING 	0x7fe2fdd35000	4	25	2
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	26	12
+3	1	READY   	0x7fe2fdd35000	4	25	3
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	26	12
+3	1	READY   	0x7fe2fdd35000	4	26	4
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	26	13
+3	1	READY   	0x7fe2fdd35000	4	26	4
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	27	14
+3	1	RUNNING 	0x7fe2fdd35000	4	26	4
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	27	14
+3	1	READY   	0x7fe2fdd35000	4	27	5
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	27	15
+3	1	READY   	0x7fe2fdd35000	4	27	5
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	28	16
+3	1	RUNNING 	0x7fe2fdd35000	4	27	5
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	28	16
+3	1	READY   	0x7fe2fdd35000	4	27	6
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	28	16
+3	1	READY   	0x7fe2fdd35000	4	28	7
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	28	17
+3	1	READY   	0x7fe2fdd35000	4	28	7
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	29	18
+3	1	RUNNING 	0x7fe2fdd35000	4	28	7
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	29	18
+3	1	READY   	0x7fe2fdd35000	4	29	8
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	29	19
+3	1	READY   	0x7fe2fdd35000	4	29	8
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	30	20
+3	1	RUNNING 	0x7fe2fdd35000	4	29	8
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	30	20
+3	1	READY   	0x7fe2fdd35000	4	29	9
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	RUNNING 	0x7fe2fdd45000	0	30	20
+3	1	READY   	0x7fe2fdd35000	4	30	10
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+2	1	READY   	0x7fe2fdd45000	0	30	21
+3	1	READY   	0x7fe2fdd35000	4	30	10
+CHILD 1: DONE y=536870912
+Process 2 exited with code 22
+Process 1 is now waking up
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	RUNNING 	0x7fe2fdd66000	0	20	0
+2	1	ZOMBIE  	0x7fe2fdd45000	0	30	21
+3	1	READY   	0x7fe2fdd35000	4	30	10
+Zombie Process 2 killed by Parent Process 1.
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	RUNNING 	0x7fe2fdd35000	4	30	10
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	30	11
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	31	12
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	32	13
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	32	14
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	33	15
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	34	16
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	34	17
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	35	18
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	35	19
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	36	20
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	37	21
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	SLEEPING	0x7fe2fdd66000	0	20	0
+3	1	READY   	0x7fe2fdd35000	4	37	22
+CHILD 2: DONE y=536870912
+Process 3 exited with code 11
+Process 1 is now waking up
+pid	ppid	current state	base addr	nice	static	total ticks
+1	0	RUNNING 	0x7fe2fdd66000	0	20	0
+3	1	ZOMBIE  	0x7fe2fdd35000	4	37	22
+Zombie Process 3 killed by Parent Process 1.
+init_fn Finished
+
